@@ -164,7 +164,7 @@ class DashboardController extends Controller
         $recent_users = DB::table('users')
             ->whereNull('deleted_at')
             ->select('id', 'nom', 'prenom', 'email', 'role', 'created_at',
-                     DB::raw("CONCAT(COALESCE(nom, ''), ' ', COALESCE(prenom, '')) as name"))
+                     DB::raw("COALESCE(nom, ''), ' ', COALESCE(prenom, '') as name"))
             ->orderBy('created_at', 'desc')
             ->limit(5)
             ->get();
